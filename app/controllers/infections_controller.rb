@@ -51,6 +51,23 @@ class InfectionsController < ApplicationController
 
     end
 
+    # Gets temp ids from Infection table
+    # IN - accessToken
+    # OUT - temp_ids -> array of all temp id strings stored in Infection table
+    def temp_ids
+        begin
+          decoded_access_token = JWT.decode(params[:accessToken], 's3cr3t', true, algorithm: 'HS256')
+          if decoded_access_token
+            @temp_ids = Infection.pluck(:temp_id)
+            render json: {temp_ids: @temp_ids}
+          end
+  
+        rescue => exception
+          render json: {status: "Invalid Token"}
+        end
+  
+    end
+
 
     private
 
