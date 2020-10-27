@@ -45,7 +45,7 @@ class InfectionsController < ApplicationController
             # Return tempIDs back to user
             render json: {result: infectionArray}
         else 
-            render json: {status: "Invalid Access Token"}
+            render json: {error: "Invalid Access Token"}
         end
         
 
@@ -58,7 +58,7 @@ class InfectionsController < ApplicationController
         begin
           decoded_access_token = JWT.decode(params[:accessToken], 's3cr3t', true, algorithm: 'HS256')
           if decoded_access_token
-            @temp_ids = Infection.pluck(:temp_id)
+            @temp_ids = Infection.select(:temp_id, :created_at)
             render json: {temp_ids: @temp_ids}
           end
   
