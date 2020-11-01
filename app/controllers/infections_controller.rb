@@ -6,13 +6,14 @@ class InfectionsController < ApplicationController
 
     def submit
         # Make sure that temp IDs were actually provided
-        if !params[:tempIdTokens].any?
+        if !params[:tempIDs].any?
             render json: {error: "No Temp ID Tokens Provided"}
             return
         end
 
+        # Authenticate User
         # Assumble request
-        uri_string = ENV['AUTH_URI'] + "/validate"
+        uri_string = ENV['AUTH_URI'] + "/validate" 
         url = URI(uri_string)
         http = Net::HTTP.new(url.host, url.port);
         request = Net::HTTP::Post.new(url)
@@ -26,24 +27,26 @@ class InfectionsController < ApplicationController
         # Check if accessToken was valid
         if result["status"] == "Valid Token"
             # Decode tempIdTokens param
-            infectionArray = []
-            begin
-                params[:tempIdTokens].each do |encoded_token|
-                    decoded = JWT.decode(encoded_token, 's3cr3t', true, algorithm: 'HS256')
-                    # infection = Infection.create(temp_id: decoded[0]["temp_id"])
-                    infectionArray.push(decoded[0]["temp_id"])
-                end
-            rescue
-                render json: {error: "Invalid Temp ID Token"}
-                return
-            end
+            # infectionArray = []
+            # begin
+            #     params[:tempIdTokens].each do |encoded_token|
+            #         decoded = JWT.decode(encoded_token, 's3cr3t', true, algorithm: 'HS256')
+            #         # infection = Infection.create(temp_id: decoded[0]["temp_id"])
+            #         infectionArray.push(decoded[0]["temp_id"])
+            #     end
+            # rescue
+            #     render json: {error: "Invalid Temp ID Token"}
+            #     return
+            # end
 
-            infectionArray.each do |tempId|
+            params[:tempIDs].each do |tempId|
                 Infection.create(temp_id: tempId)
             end
 
+            addedEntries = Infection.find(params[:tempIDs])
+
             # Return tempIDs back to user
-            render json: {result: infectionArray}
+            render json: {result: addedEntries}
         else 
             render json: {error: "Invalid Access Token"}
         end
