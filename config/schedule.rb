@@ -20,8 +20,9 @@
 # Learn more: http://github.com/javan/whenever
 
 set :output, "log/cron.log"
-
-every 1.minute do
-    rake 'cleandb:cleandb'
-    
+set :job_template, "zsh -l -c ':job'"
+job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
+    cd :path && bundle exec rake :task --silent :output }
+every 2.weeks do
+    rbenv_rake 'clean_infections:clean_infections'
 end
