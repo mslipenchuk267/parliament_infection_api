@@ -23,7 +23,7 @@ set :output, "log/cron.log"
 set :job_template, "zsh -l -c ':job'"
 job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
     cd :path && bundle exec rake :task --silent :output }
-every 1.min do
+every 1.minute do
     #rbenv_rake 'clean_infections:clean_infections'
-    puts "hey"
+    rake 'clean_infections:clean_infections'
 end

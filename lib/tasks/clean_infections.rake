@@ -14,8 +14,9 @@ namespace :clean_infections do
 
     # The syntax of created_at uses < to mean backward in time and vice versa
 
-    Infection.where("created_at < ?", 14.days.ago.to_datetime).delete_all
+    #Infection.where("created_at < ?", 14.days.ago.to_datetime).delete_all
     # puts "Removed infections added more than 14 days ago"
+    puts "hey working"
 
   end
 
