@@ -19,8 +19,15 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, "log/cron.log"
-set :job_template, "zsh -l -c ':job'"
+ENV.each_key do |key|
+    env key.to_sym, ENV[key]
+end
+
+set :environment, ENV["RAILS_ENV"]
+
+
+set :output, "log/cron2.log"
+#set :job_template, "zsh -l -c ':job'"
 job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
     cd :path && bundle exec rake :task --silent :output }
 every 1.minute do

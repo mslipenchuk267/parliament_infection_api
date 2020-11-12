@@ -5,10 +5,13 @@ RUN mkdir /infection-backend
 WORKDIR /infection-backend
 
 # Install required tooling
-RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client --fix-missing --no-install-recommends
+RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client --fix-missing --no-install-recommends nano
+RUN apt-get update && \
+  apt-get install -qq -y --no-install-recommends cron && \
+  rm -rf /var/lib/apt/lists/*
 
 # Set our environment variables
-ENV RAILS_ENV production 
+ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true 
 ENV RAILS_LOG_TO_STDOUT true 
 
@@ -23,7 +26,11 @@ RUN bundle install
 
 COPY . ./
 
+RUN touch ./log/cron2.log
+
+RUN bundle exec whenever --update-crontab
+
 EXPOSE 3000
 
 # Start the puma server
-CMD bundle exec puma -p 3000
+CMD cron && bundle exec puma -p 3000
