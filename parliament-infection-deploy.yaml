@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: parliament-infection # name of the deployment
+  name: parliament-notification # name of the deployment
   labels: # these labels apply to the deployment
-    app: parliament-infection
+    app: parliament-notification
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: parliament-infection
+      app: parliament-notification
   template:
     metadata:
       labels: # these labels apply to our container
-        app: parliament-infection
+        app: parliament-notification
     spec:
       containers:
-        - name: parliament-infection # name of our container
-          image: 774458662053.dkr.ecr.us-east-2.amazonaws.com/parliament-infection:latest # the URI that we got from ECR
+        - name: parliament-notification # name of our container
+          image: 774458662053.dkr.ecr.us-east-2.amazonaws.com/parliament-notification:latest # the URI that we got from ECR
           env:
             - name: DB_URL
-              value: infection-database-1.cczohqa4fo3d.us-east-2.rds.amazonaws.com
+              value: notification-database-1.cczohqa4fo3d.us-east-2.rds.amazonaws.com
               # URL of our database endpoint
             - name: DB_USERNAME
               valueFrom:
@@ -33,6 +33,6 @@ spec:
                   name: db-creds
                   key: password # use the encoded password from the K8s secret db-creds
             - name: DB_NAME
-              value: infection_db # our DB is named backend
+              value: notification_db # our DB is named backend
           ports:
             - containerPort: 3000 # expose the running contianer on port 3000
