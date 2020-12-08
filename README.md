@@ -44,6 +44,3 @@ This API is responsible for interacting with the infection database.
          "tempIDs": {
          }
     }
-
-    
-
