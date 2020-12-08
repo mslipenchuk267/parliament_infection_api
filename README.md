@@ -5,14 +5,13 @@ This API is responsible for interacting with the infection database.
 ## Configuration
 
 * Ruby version = 2.7.1
-* Authentication: JWT
+* CronJobs: whenever gem
 * Database = Postgresql
 
 ## Deployment Instructions
 ### Development Environment
 - Run ``` bundle install ``` in root directory
-- Start server with ``` rails s ```
-     - Default command runs server on ```localhost:3000```
+- Start server with ``` rails s -p 3002```
 
 ## Endpoints:
 - ```/submit ```
