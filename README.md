@@ -1,24 +1,49 @@
-# README
+# Parliament Infection API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This API is responsible for interacting with the infection database.
 
-Things you may want to cover:
+## Configuration
 
-* Ruby version
+* Ruby version = 2.7.1
+* Authentication: JWT
+* Database = Postgresql
 
-* System dependencies
+## Deployment Instructions
+### Development Environment
+- Run ``` bundle install ``` in root directory
+- Start server with ``` rails s ```
+     - Default command runs server on ```localhost:3000```
 
-* Configuration
+## Endpoints:
+- ```/submit ```
+    - Puts temporary IDs in Infection table
+    - Example Payload: 
+    ```
+    { 
+      "username":"example@example.com", 
+      "password":"password" 
+    }
+    ```
+    - Example Successful Return:
+    ```
+    {
+      result: addedEntries
+    }
+    
+- ```/temp_ids ```
+    - Login an existing user
+    - Example Payload: 
+    ```
+    { 
+      "accessToken":"1a2b3c4d5e6f7"
+    }
+    ```
+    - Example Successful Return:
+    ```
+    {
+         "tempIDs": {
+         }
+    }
 
-* Database creation
+    
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
