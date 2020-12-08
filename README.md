@@ -20,8 +20,7 @@ This API is responsible for interacting with the infection database.
     - Example Payload: 
     ```
     { 
-      "username":"example@example.com", 
-      "password":"password" 
+      "accessToken":"1a2b3c4d5e6f7"
     }
     ```
     - Example Successful Return:
