@@ -8,10 +8,17 @@ This API is responsible for interacting with the infection database.
 * CronJobs: whenever gem
 * Database = Postgresql
 
-## Deployment Instructions
-### Development Environment
+# Deployment Instructions
+## Production Environment
+### Host
+http://a73906904480049e69678e0cb9be2e22-1728580132.us-east-2.elb.amazonaws.com
+
+
+## Development Environment
 - Run ``` bundle install ``` in root directory
 - Start server with ``` rails s -p 3002```
+### Host
+http://localhost:3002
 
 ## Endpoints:
 - ```/submit ```
