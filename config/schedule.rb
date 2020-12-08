@@ -25,12 +25,22 @@ end
 
 set :environment, ENV["RAILS_ENV"]
 
+case @environment
 
-set :output, "log/cron2.log"
-#set :job_template, "zsh -l -c ':job'"
-job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
-    cd :path && bundle exec rake :task --silent :output }
-every 1.minute do
-    #rbenv_rake 'clean_infections:clean_infections'
-    rake 'clean_infections:clean_infections'
+    when 'production'
+        set :output, "log/cron_production.log"
+
+        every :day, at: '12:00 pm' do
+            rake 'clean_infections:clean_infections'
+        end
+
+    when 'development'
+        set :output, "log/cron_development.log"
+        set :job_template, "zsh -l -c ':job'"
+        job_type :rbenv_rake, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
+            cd :path && bundle exec rake :task --silent :output }
+        every :day, at: '12:00 pm' do
+            rbenv_rake 'clean_infections:clean_infections'
+        end
+    
 end

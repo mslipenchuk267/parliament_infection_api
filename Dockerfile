@@ -26,11 +26,10 @@ RUN bundle install
 
 COPY . ./
 
-RUN touch ./log/cron2.log
-
-RUN bundle exec whenever --update-crontab
+RUN touch ./log/cron_development.log
+RUN touch ./log/cron_production.log
 
 EXPOSE 3000
 
 # Start the puma server
-CMD cron && bundle exec puma -p 3000
+CMD bundle exec puma -p 3000 -d && bundle exec whenever --update-crontab && cron -f
