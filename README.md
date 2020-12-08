@@ -29,7 +29,6 @@ This API is responsible for interacting with the infection database.
     {
       result: addedEntries
     }
-    
 - ```/temp_ids ```
     - Login an existing user
     - Example Payload: 
