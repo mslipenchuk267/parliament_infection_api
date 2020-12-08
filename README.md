@@ -11,7 +11,7 @@ This API is responsible for interacting with the infection database.
 # Deployment Instructions
 ## Production Environment
 ### Host
-http://a73906904480049e69678e0cb9be2e22-1728580132.us-east-2.elb.amazonaws.com:3002
+http://a73906904480049e69678e0cb9be2e22-1728580132.us-east-2.elb.amazonaws.com
 
 
 ## Development Environment
