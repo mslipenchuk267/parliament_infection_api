@@ -41,6 +41,6 @@ This API is responsible for interacting with the infection database.
     ```
     {
      {
-    "temp_ids" : [{"temp_id":"00000000-0000-0000-0000-905f5a19f5e9","created_at":"2020-11-01T18:23:24.731Z"},{"temp_id":"00000000-0000-0000-0000-                                   80df5b1111f2","created_at":"2020-11-02T18:23:24.731Z"},{"temp_id":"00000000-0000-0000-0000-711fabfa2122","created_at\":\"2020-11-                                 03T18:23:24.731Z"}]
+    "temp_ids" : [{"temp_id":"00000000-0000-0000-0000-905f5a19f5e9","created_at":"2020-11-01T18:23:24.731Z"},{"temp_id":"00000000-0000-0000-0000-80df5b1111f2","created_at":"2020-11-02T18:23:24.731Z"},{"temp_id":"00000000-0000-0000-0000-711fabfa2122","created_at\":\"2020-11-03T18:23:24.731Z"}]
      }
     }
